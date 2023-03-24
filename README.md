@@ -16,22 +16,22 @@ The following image is a small example of the Colonel Blotto game, courtesy of D
 
 ### TLDR
 
-Adjust or add to any of the `scenario...` functions in the `main.py` file and run that script to see the various values of varying scenarios!
+Adjust or add to any of the `scenario...` functions in the [`main.py`](main.py) file and run that script to see the various values of varying scenarios!
 
 ### Assignment Permutations
 
-Run this file to see how to achieve varying number of assignments as a function of *number of troops* and *number of battlefields*.
+Run [this](assignment_permutations.py) file to see how to achieve varying number of assignments as a function of *number of troops* and *number of battlefields*.
 
 ### Cost Matrix
 
-Run this file to see how different cost matrices are computed as a function of *Colonel x number of troops* and *battlefield i weight*.
+Run [this](cost_matrix.py) file to see how different cost matrices are computed as a function of *Colonel x number of troops* and *battlefield i weight*.
 
 ### Pessimistic Strategies
 
-Run this file to see what is the best action for a given cost matrix in the form of *n x m* where *n* and *m* don't have to be equal to each other.
+Run [this](pessimistic_strategies.py) file to see what is the best action for a given cost matrix in the form of *n x m* where *n* and *m* don't have to be equal to each other.
 
 ### Main
 
-Run this file to see how all the previous algorithms work with each other to compute the final values and the best action for each colonel.
+Run [this](main.py) file to see how all the previous algorithms work with each other to compute the final values and the best action for each colonel.
 
 Feel free to adjust or add to any of the `scenario...` functions to see how varying number of troops and weights can affect the actions and values!.
