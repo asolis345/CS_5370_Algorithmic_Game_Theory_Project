@@ -30,6 +30,11 @@ Run [this](cost_matrix.py) file to see how different cost matrices are computed 
 
 Run [this](pessimistic_strategies.py) file to see what is the best action for a given cost matrix in the form of *n x m* where *n* and *m* don't have to be equal to each other.
 
+### Mixed Strategy Nash Equilibria
+
+Run [this](mixed_nash_equilibra.py) file to see what is the probability distribution with which each colonel should choose each strategy.
+Similar to the Pessimistic Strategies this takes a cost matrix in the form of *n x m* where *n* and *m* don't have to be equal to each other.
+
 ### Main
 
 Run [this](main.py) file to see how all the previous algorithms work with each other to compute the final values and the best action for each colonel.
