@@ -1,9 +1,10 @@
 import sys
 import numpy as np
-np.set_printoptions(threshold=sys.maxsize)
+np.set_printoptions(precision=4)
 
 from cost_matrix import create_assignment_matrix
 from pessimistic_strategies import (max_min, min_max)
+from mixed_nash_equilibra import cal_mne
 
 
 def setup_scenario_one():
@@ -42,12 +43,13 @@ def setup_scenario_three():
     Returns:
         tuple: colonel a troops, colonel b troops, battlefield weights
     """
-    colonel_a = 4
-    colonel_b = 3
+    colonel_a = 3
+    colonel_b = 2
     groups = [0.1, 0.7, 0.2]
     return (colonel_a, colonel_b, groups)    
 
-def run_scenario(colonel_a: int, colonel_b: int, groups: list[tuple]):
+
+def run_min_max_scenario(colonel_a: int, colonel_b: int, groups: list[tuple]):
     """Runs complete scenario using pessimistic strategies
 
     Args:
@@ -66,14 +68,36 @@ def run_scenario(colonel_a: int, colonel_b: int, groups: list[tuple]):
     print("")
 
 
-if __name__ == "__main__":
-    colonel_a, colonel_b, groups = setup_scenario_one()
-    run_scenario(colonel_a, colonel_b, groups)
+def run_mneq_scenario(colonel_a: int, colonel_b: int, groups: list[tuple]):
+    """Runs complete scenario using pessimistic strategies
 
-    colonel_a, colonel_b, groups = setup_scenario_two()
-    run_scenario(colonel_a, colonel_b, groups)
+    Args:
+        colonel_a (int): colonel a number of troops
+        colonel_b (int): colonel b number of troops
+        groups (list[int]): weights per battlefields
+    """
+    print("Weights over battlefields:")
+    print(groups)
+    cost_matrix = create_assignment_matrix(colonel_a, colonel_b, groups)
 
-    colonel_a, colonel_b, groups = setup_scenario_three()
-    run_scenario(colonel_a, colonel_b, groups)
-
+    row_colonel_strategies = cal_mne(cost_matrix)
+    column_colonel_strategies = cal_mne(cost_matrix.T)
     
+    print(f'The A colonel strategies are as follows:\n{row_colonel_strategies}')
+    print(f'The B colonel strategies are as follows:\n{column_colonel_strategies}')
+
+    print(f'The A colonel best option is to play:\n{np.argmax(row_colonel_strategies)} with probability {np.max(row_colonel_strategies)}')
+    print(f'The B colonel best option is to play:\n{np.argmax(column_colonel_strategies)} with probability {np.max(column_colonel_strategies)}')
+
+    print("")
+
+
+if __name__ == "__main__":
+    ### Scenario Setup ###
+    # colonel_a, colonel_b, groups = setup_scenario_one()
+    # colonel_a, colonel_b, groups = setup_scenario_two()
+    colonel_a, colonel_b, groups = setup_scenario_three()
+
+    ### Run Strategy ###
+    # run_min_max_scenario(colonel_a, colonel_b, groups)
+    run_mneq_scenario(colonel_a, colonel_b, groups)
