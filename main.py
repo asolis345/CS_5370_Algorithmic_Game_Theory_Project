@@ -2,9 +2,10 @@ import sys
 import numpy as np
 np.set_printoptions(precision=4)
 
-from cost_matrix import create_assignment_matrix
+from cost_matrix import (create_assignment_matrix, create_assignment_permutation)
 from pessimistic_strategies import (max_min, min_max)
 from mixed_nash_equilibra import cal_mne
+from plot_assignment_probability import (cal_prob_assignment_per_battlefield, plot_assignment_prob)
 
 
 def setup_scenario_one():
@@ -89,7 +90,7 @@ def run_mneq_scenario(colonel_a: int, colonel_b: int, groups: list[tuple]):
     print(f'The A colonel best option is to play:\n{np.argmax(row_colonel_strategies)} with probability {np.max(row_colonel_strategies)}')
     print(f'The B colonel best option is to play:\n{np.argmax(column_colonel_strategies)} with probability {np.max(column_colonel_strategies)}')
 
-    print("")
+    return (row_colonel_strategies, column_colonel_strategies)
 
 
 if __name__ == "__main__":
@@ -97,7 +98,15 @@ if __name__ == "__main__":
     # colonel_a, colonel_b, groups = setup_scenario_one()
     # colonel_a, colonel_b, groups = setup_scenario_two()
     colonel_a, colonel_b, groups = setup_scenario_three()
+    colonel_a_options = create_assignment_permutation(colonel_a, len(groups))
+    colonel_b_options = create_assignment_permutation(colonel_b, len(groups))
 
     ### Run Strategy ###
     # run_min_max_scenario(colonel_a, colonel_b, groups)
-    run_mneq_scenario(colonel_a, colonel_b, groups)
+    r_strategies, c_strategies = run_mneq_scenario(colonel_a, colonel_b, groups)
+
+    colonel_a_df = cal_prob_assignment_per_battlefield(colonel_a_options, r_strategies)
+    plot_assignment_prob(colonel_a_df)
+    
+    colonel_b_df = cal_prob_assignment_per_battlefield(colonel_b_options, c_strategies)
+    plot_assignment_prob(colonel_b_df)
