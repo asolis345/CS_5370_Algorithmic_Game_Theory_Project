@@ -6,6 +6,7 @@ from cost_matrix import (create_assignment_matrix, create_assignment_permutation
 from pessimistic_strategies import (max_min, min_max)
 from mixed_nash_equilibra import cal_mne
 from plot_assignment_probability import (cal_prob_assignment_per_battlefield, plot_assignment_prob)
+from weakest_link_cost_matrix import calculate_weakest_link_cost_matrix
 
 
 def setup_scenario_one():
@@ -93,6 +94,23 @@ def run_mneq_scenario(colonel_a: int, colonel_b: int, groups: list[tuple]):
     return (row_colonel_strategies, column_colonel_strategies)
 
 
+def run_weakest_link_scenario(colonel_a: int, colonel_b: int, groups: list[tuple]):
+    print("Weights over battlefields:")
+    print(groups)
+    cost_matrix = create_assignment_matrix(colonel_a, colonel_b, groups)
+
+    row_cost_matrix = calculate_weakest_link_cost_matrix(cost_matrix)
+    column_cost_matrix = calculate_weakest_link_cost_matrix(cost_matrix.T)
+
+    row_colonel_strategies = cal_mne(row_cost_matrix)
+    column_colonel_strategies = cal_mne(column_cost_matrix)
+
+    print(f'The A colonel strategies are as follows:\n{row_colonel_strategies}')
+    print(f'The B colonel strategies are as follows:\n{column_colonel_strategies}')
+
+    return (row_colonel_strategies, column_colonel_strategies)
+
+
 if __name__ == "__main__":
     ### Scenario Setup ###
     # colonel_a, colonel_b, groups = setup_scenario_one()
@@ -104,6 +122,7 @@ if __name__ == "__main__":
     ### Run Strategy ###
     # run_min_max_scenario(colonel_a, colonel_b, groups)
     r_strategies, c_strategies = run_mneq_scenario(colonel_a, colonel_b, groups)
+    r_strategies, c_strategies = run_weakest_link_scenario(colonel_a, colonel_b, groups)
 
     colonel_a_df = cal_prob_assignment_per_battlefield(colonel_a_options, r_strategies)
     plot_assignment_prob(colonel_a_df)
