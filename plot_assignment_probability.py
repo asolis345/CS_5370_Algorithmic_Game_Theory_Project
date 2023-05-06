@@ -27,11 +27,13 @@ def cal_prob_assignment_per_battlefield(assignments: list[tuple], ms_prob: np.ar
     return pd.DataFrame(battle_field_labels)
 
 
-def plot_assignment_prob(plot_data: pd.DataFrame, save_fig: bool=False) -> None:
+def plot_assignment_prob(plot_data: pd.DataFrame, colonel_name: str, n_troops: int, save_fig: bool=False) -> None:
     """Utility function to plot output of `cal_prob_assignment_per_battlefield` 
 
     Args:
         plot_data (pd.DataFrame): pd.df with probabilities of assigning `n` troops to a battlefield
+        colonel_name (str): Name used for title
+        n_troops (int): Number of troops used for title
         save_fig (bool, optional): Flag used to indicate if plot should be saved. Defaults to False.
     """
     fig = plt.figure()
@@ -39,7 +41,7 @@ def plot_assignment_prob(plot_data: pd.DataFrame, save_fig: bool=False) -> None:
     for c in plot_data:
         plt.scatter(np.arange(plot_data[c].size), plot_data[c].array, label=c)
     plt.xticks(np.arange(plot_data[c].size))
-    plt.title('Colonel Blotto Troop\nAllocation Probability per Battlefield')
+    plt.title(f'Troop Allocation Probability per Battlefield\nColonel: {colonel_name}, {n_troops} troops, {len(plot_data)} battlefields')
     plt.ylabel('Probability of Assignment $p$')
     plt.xlabel('Number of Assigned Troops $t$')
     ax.legend(loc='upper center')
