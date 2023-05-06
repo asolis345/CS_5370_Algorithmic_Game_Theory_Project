@@ -18,9 +18,7 @@ def cal_prob_assignment_per_battlefield(assignments: list[tuple], ms_prob: np.ar
     battle_field_labels = {f'Battlefield {i}':{} for i in assignment_df}
 
     for bf in assignment_df:
-        print(f'BF: {bf}')
         for i, assignment in enumerate(assignment_df[bf]):
-            print(f'Assignment: {assignment}')
             if assignment not in battle_field_labels[f'Battlefield {bf}']:
                 battle_field_labels[f'Battlefield {bf}'][assignment] = ms_prob[i]
             else:
