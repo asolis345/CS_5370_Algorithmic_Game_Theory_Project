@@ -35,6 +35,10 @@ Run [this](pessimistic_strategies.py) file to see what is the best action for a 
 Run [this](mixed_nash_equilibra.py) file to see what is the probability distribution with which each colonel should choose each strategy.
 Similar to the Pessimistic Strategies this takes a cost matrix in the form of *n x m* where *n* and *m* don't have to be equal to each other.
 
+### Weakest Link Game
+
+The Weakest Link game is similar to the Colonell Botto game with the exception of how the winner is determined. In the Weakest Link game if any Colonel 1 is "defending" while Colonel 2 is attacking, if ANY battlefield is lost to Colonel 2, Colonel 1 looses the game. The [weakest_link_cost_matrix.py](weakest_link_cost_matrix.py) takes the output of the [cost_matrix.py](cost_matrix.py) and returns a new structure implementing the previous rule. Using this new from of the cost matrix it can be fed into the [MSNE](mixed_nash_equilibra.py) to calculate the probability distribution with which any Colonel should choose a strategy. 
+
 ### Main
 
 Run [this](main.py) file to see how all the previous algorithms work with each other to compute the final values and the best action for each colonel.
