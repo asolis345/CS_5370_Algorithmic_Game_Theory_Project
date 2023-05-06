@@ -37,7 +37,7 @@ Similar to the Pessimistic Strategies this takes a cost matrix in the form of *n
 
 ### Weakest Link Game
 
-The Weakest Link game is similar to the Colonell Botto game with the exception of how the winner is determined. In the Weakest Link game if any Colonel 1 is "defending" while Colonel 2 is "attacking", if ANY battlefield is lost to Colonel 2, Colonel 1 looses the game. The [weakest_link_cost_matrix.py](weakest_link_cost_matrix.py) takes the output of the [cost_matrix.py](cost_matrix.py) and returns a new structure implementing the previous rule. Using this new from of the cost matrix it can be fed into the [MSNE](mixed_nash_equilibra.py) to calculate the probability distribution with which any Colonel should choose a strategy. 
+The Weakest Link game is similar to the Colonel Blotto game with the exception of how the winner is determined. In the Weakest Link game if any Colonel 1 is "defending" while Colonel 2 is "attacking", if ANY battlefield is lost to Colonel 2, Colonel 1 looses the game. The [weakest_link_cost_matrix.py](weakest_link_cost_matrix.py) takes the output of the [cost_matrix.py](cost_matrix.py) and returns a new structure implementing the previous rule. Using this new from of the cost matrix it can be fed into the [MSNE](mixed_nash_equilibra.py) to calculate the probability distribution with which any Colonel should choose a strategy. 
 
 ### Main
 
