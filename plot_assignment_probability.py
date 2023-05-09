@@ -27,7 +27,7 @@ def cal_prob_assignment_per_battlefield(assignments: list[tuple], ms_prob: np.ar
     return pd.DataFrame(battle_field_labels)
 
 
-def plot_assignment_prob(plot_data: pd.DataFrame, colonel_name: str, n_troops: int, save_fig: bool=False) -> None:
+def plot_assignment_prob(plot_data: pd.DataFrame, colonel_name: str, n_troops: int, bf_weights: list, save_fig: bool=False) -> None:
     """Utility function to plot output of `cal_prob_assignment_per_battlefield` 
 
     Args:
@@ -41,11 +41,11 @@ def plot_assignment_prob(plot_data: pd.DataFrame, colonel_name: str, n_troops: i
     for c in plot_data:
         plt.scatter(np.arange(plot_data[c].size), plot_data[c].array, label=c)
     plt.xticks(np.arange(plot_data[c].size))
-    plt.title(f'Troop Allocation Probability per Battlefield\nColonel: {colonel_name}, {n_troops} troops, {len(plot_data)} battlefields')
+    plt.title(f'Weakest Link\nTroop Allocation Probability per Battlefield\nColonel: {colonel_name}, {n_troops} troops, {len(plot_data)} battlefields {bf_weights} weights')
     plt.ylabel('Probability of Assignment $p$')
     plt.xlabel('Number of Assigned Troops $t$')
     ax.legend(loc='upper center')
     if save_fig:
-        plt.savefig('tmp.png', bbox_inches='tight')
+        plt.savefig(f'{colonel_name}_colonel_{n_troops}_troops_{len(plot_data)}_troops.png', bbox_inches='tight')
     else:
         plt.show()
