@@ -125,7 +125,7 @@ if __name__ == "__main__":
     r_strategies, c_strategies = run_weakest_link_scenario(colonel_a, colonel_b, groups)
 
     colonel_a_df = cal_prob_assignment_per_battlefield(colonel_a_options, r_strategies)
-    plot_assignment_prob(colonel_a_df, 'Row', colonel_a)
+    plot_assignment_prob(colonel_a_df, 'Row', colonel_a, groups, True)
     
     colonel_b_df = cal_prob_assignment_per_battlefield(colonel_b_options, c_strategies)
-    plot_assignment_prob(colonel_b_df, 'Column', colonel_b)
+    plot_assignment_prob(colonel_b_df, 'Column', colonel_b, groups, True)
